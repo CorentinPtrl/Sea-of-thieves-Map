@@ -28,7 +28,31 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
+      - name: Create Pre-Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: commit_${{ github.sha }}
+          release_name: Commit ${{ github.sha }}
+          draft: false
+          prerelease: true
+      - uses: papeloto/action-zip@v1
+        with:
+          files: build/${{ matrix.targetPlatform }}
+          dest: ${{ matrix.targetPlatform }}.zip
       - uses: actions/upload-artifact@v2
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
+      - name: Pre-Release ${{ matrix.targetPlatform }} Build
+        id: release-win
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ matrix.targetPlatform }}.zip
+          asset_name: ${{ matrix.targetPlatform }}.zip
+          asset_content_type: application/octet-stream
