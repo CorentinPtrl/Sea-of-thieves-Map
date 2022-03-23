@@ -38,14 +38,12 @@ jobs:
           release_name: Commit ${{ github.sha }}
           draft: false
           prerelease: true
-      - uses: papeloto/action-zip@v1
+      - name: Compress build
+        id: compress_build
+        uses: papeloto/action-zip@v1
         with:
           files: build/${{ matrix.targetPlatform }}
           dest: ${{ matrix.targetPlatform }}.zip
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Build-${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}
       - name: Pre-Release ${{ matrix.targetPlatform }} Build
         id: release-win
         uses: actions/upload-release-asset@v1
