@@ -234,7 +234,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769fefc238c02584d833583e7edb7657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShipPrefab: {fileID: 4256511104867634864, guid: bb5251fbe81de5c449e05f80d6ec113a, type: 3}
   LocalPlayerMap: {fileID: 1362821886}
+  Ships: []
 --- !u!4 &585642949
 Transform:
   m_ObjectHideFlags: 0
@@ -354,7 +356,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,7 +438,7 @@ GameObject:
   - component: {fileID: 1362821888}
   - component: {fileID: 1362821887}
   m_Layer: 0
-  m_Name: MainShip
+  m_Name: MainPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
